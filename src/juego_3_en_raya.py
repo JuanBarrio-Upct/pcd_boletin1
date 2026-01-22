@@ -60,3 +60,28 @@ def test_movimiento_incorrecto():
     x = 2
     y = 3
     assert False == movimiento_valido(x, y, movimientos_otro_jugador)
+
+
+# --- Función de Jugada Ganadora (Pág. 13-14) ---
+def jugada_ganadora(movimientos_jugador):
+    """
+    Método que permite determinar si los movimientos de un jugador le
+    permiten ganar una partida.
+    Parámetros:
+    * movimientos_jugador: dict con el conjunto de movimientos de un jugador
+    """
+    # Comprobamos si hay 3 fichas en una fila
+    for fila in movimientos_jugador:
+        movimientos_columna = movimientos_jugador[fila]
+        if len(movimientos_columna) == 3:
+            return True
+    return False
+
+# --- Tests de Jugada Ganadora (Pág. 14) ---
+def test_no_ganador():
+    movimientos_jugador = {2: [2, 3]}
+    assert False == jugada_ganadora(movimientos_jugador)
+
+def test_ganador():
+    movimientos_jugador = {2: [1, 2, 3]}
+    assert True == jugada_ganadora(movimientos_jugador)
